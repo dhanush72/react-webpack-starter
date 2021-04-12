@@ -1,3 +1,5 @@
+import "./index.scss";
+
 const recipe = {
   leatherStrips: 2,
   ironIngot: 1,
