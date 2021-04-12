@@ -1,5 +1,11 @@
+let mode = "development";
+
+if (process.env.NODE_ENV === "production") {
+  mode = "production";
+}
+
 module.exports = {
-  mode: "development",
+  mode: mode,
 
   module: {
     rules: [
@@ -12,6 +18,8 @@ module.exports = {
       },
     ],
   },
+
+  devtool: "source-map",
 
   devServer: {
     contentBase: "./dist", //relative path
