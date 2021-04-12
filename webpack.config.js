@@ -22,9 +22,9 @@ module.exports = {
           loader: "babel-loader",
         },
       },
-      //css loader
+      //css loaders
       {
-        test: /\.s?css$/,
+        test: /\.(s[ac]|c)ss$/i,
         use: [
           miniCssExtractPlugin.loader,
           "css-loader",
