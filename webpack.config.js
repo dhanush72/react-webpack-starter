@@ -1,4 +1,4 @@
-const miniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 
 let mode = "development";
 let target = "web";
@@ -12,8 +12,30 @@ module.exports = {
   mode: mode,
   target: target,
 
+  output: {
+    assetModuleFilename: "images/[hash][ext][query]",
+  },
+
   module: {
     rules: [
+      //css loaders
+      {
+        test: /\.(s[ac]|c)ss$/i,
+        use: [
+          {
+            loader: MiniCSSExtractPlugin.loader,
+            options: { publicPath: "" },
+          },
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
+        ],
+      },
+      // image loader
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: "asset",
+      },
       //babel loader
       {
         test: /\.jsx?$/,
@@ -22,20 +44,10 @@ module.exports = {
           loader: "babel-loader",
         },
       },
-      //css loaders
-      {
-        test: /\.(s[ac]|c)ss$/i,
-        use: [
-          miniCssExtractPlugin.loader,
-          "css-loader",
-          "postcss-loader",
-          "sass-loader",
-        ],
-      },
     ],
   },
 
-  plugins: [new miniCssExtractPlugin()],
+  plugins: [new MiniCSSExtractPlugin()],
 
   resolve: {
     extensions: [".js", ".jsx"],
